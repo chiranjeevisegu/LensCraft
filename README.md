@@ -14,8 +14,14 @@
 ### Hero — Product Gallery & Info
 ![Hero section showing Lumina X1 Pro camera with price, rating, color selector and Add to Cart CTA](screenshots/hero.png)
 
+### Urgency Bar — Live Social Proof
+![Live viewer count with pulsing green dot and low-stock warning below the price](screenshots/urgency.png)
+
 ### Spec Strip — Key Specifications at a Glance
 ![Animated spec strip showing 45MP, 8K, 10-stop IBIS, 120fps, AI AF, IP54](screenshots/specs.png)
+
+### Full Technical Specifications — Collapsible Table
+![Expanded specs table showing Sensor, Autofocus, Video and Body categories with detailed data](screenshots/specs_table.png)
 
 ### What's in the Box
 ![Six-card unboxing grid with emoji icons for each included item](screenshots/inbox.png)
@@ -25,6 +31,12 @@
 
 ### Shipping & Warranty Info Cards
 ![Two side-by-side dark cards covering shipping options and warranty terms](screenshots/shipping.png)
+
+### FAQ Accordion — Frequently Asked Questions
+![FAQ section with first question expanded showing smooth accordion animation and gold border highlight](screenshots/faq.png)
+
+### Related Products — You May Also Like
+![Three product cards (Lumina Z5, 50mm Prime lens, Battery Grip) with hover-lift effect and Add to Cart buttons](screenshots/related.png)
 
 ### Toast Notification — Add to Cart Feedback
 ![Animated toast notification sliding up from the bottom after clicking Add to Cart](screenshots/toast.png)
@@ -52,14 +64,18 @@
 | **Breadcrumb** | Semantic navigation trail |
 | **Product Gallery** | Main image + 4 clickable thumbnails with fade transition |
 | **Product Info** | Name, brand tag, 4.8★ rating, price / original price / savings badge, In Stock |
+| **🔴 Urgency Bar** | Live pulsing viewer count + "Only 8 left in stock" — fluctuates every 4s via JS |
 | **Color Selector** | 3 swatches (Midnight Black / Titanium Silver / Forest Green) |
 | **Quantity Control** | +/− stepper capped at 1–10 |
 | **CTAs** | Add to Cart, Buy Now, Wishlist heart toggle |
 | **Product Description** | 60-word spec-rich copy |
+| **📋 Full Specs Table** | Collapsible 16-row table: Sensor, Autofocus, Video, Body — smooth height animation |
 | **Spec Strip** | 45MP · 8K · 10-stop · 120fps · AI AF · IP54 with gold gradient numbers |
 | **What's in the Box** | 6-item staggered card grid |
 | **Customer Reviews** | Animated rating bars + 3 verified review cards with gradient avatars |
 | **Shipping & Warranty** | Two detailed info cards |
+| **❓ FAQ Accordion** | 5 collapsible Q&As with gold chevron, one-at-a-time open logic |
+| **🛍️ Related Products** | 3-card cross-sell grid with hover lift, badges, rating, and add-to-cart |
 | **Newsletter** | Email subscribe form |
 | **Footer** | 4-column links, 4 social icons, 6 payment chips, copyright |
 
@@ -69,6 +85,11 @@
 | **Toast Notification** | Bounces up from bottom with spring animation on cart add — shows colour × qty |
 | **Sticky Cart Bar** | Slides in from the top when you scroll past the hero — always-visible CTA |
 | **Lightbox Modal** | Click zoom button or double-click image → fullscreen modal with thumbnail strip; `Esc` to close |
+| **Live Urgency Counter** | "X people viewing" number increments/decrements randomly every 4 seconds |
+| **Specs Table Toggle** | Click to expand/collapse full 16-row tech spec table with smooth animation |
+| **FAQ Accordion** | Click any question → smooth expand, gold border on open item, one-at-a-time |
+| **Related Products Cart** | Add-to-cart on cross-sell cards increments header badge + green flash |
+| **Back-to-Top Button** | Gold gradient circle appears after 400px scroll, smooth-scrolls to top |
 | **Scroll Reveal** | Sections fade + slide up on viewport enter via `IntersectionObserver` |
 | **Staggered Inbox** | "What's in the Box" cards enter with 60 ms delay between each |
 | **Rating Bar Animation** | Bars animate from 0% to their value only when scrolled into view |
@@ -89,13 +110,17 @@ LensCraft/
 ├── camera_thumb3.png   # Side view thumbnail
 ├── camera_thumb4.png   # Rear view thumbnail
 └── screenshots/
-    ├── hero.png
-    ├── specs.png
-    ├── inbox.png
-    ├── reviews.png
-    ├── shipping.png
-    ├── toast.png
-    └── footer.png
+    ├── hero.png        # Product hero section
+    ├── urgency.png     # Live urgency bar
+    ├── specs.png       # Animated spec strip
+    ├── specs_table.png # Collapsible full specs table
+    ├── inbox.png       # What's in the Box grid
+    ├── reviews.png     # Customer reviews
+    ├── shipping.png    # Shipping & Warranty cards
+    ├── faq.png         # FAQ accordion
+    ├── related.png     # Related products grid
+    ├── toast.png       # Toast notification
+    └── footer.png      # Newsletter & Footer
 ```
 
 ---
@@ -115,7 +140,7 @@ python -m http.server 5500
 Install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), right-click `index.html` → *Open with Live Server*.
 
 **Option 3 — Just open the file:**
-Double-click `index.html` — works with no server for basic viewing (images may not load in some browsers without a server).
+Double-click `index.html` — works with no server for basic viewing.
 
 ---
 
@@ -127,7 +152,7 @@ Double-click `index.html` — works with no server for basic viewing (images may
 --clr-surface2:  #1a1e2a   /* Elevated surface */
 --clr-accent:    #e8a045   /* Gold accent */
 --clr-gold-grad: linear-gradient(135deg, #e8a045, #f5c878)
---clr-green:     #3dd68c   /* Success / In-stock */
+--clr-green:     #3dd68c   /* Success / In-stock / urgency dot */
 --clr-text:      #f0f2f8   /* Primary text */
 --clr-muted:     #8892a4   /* Secondary text */
 ```
@@ -138,14 +163,20 @@ Double-click `index.html` — works with no server for basic viewing (images may
 
 **LensCraft Lumina X1 Pro** — Full-Frame Mirrorless Camera Body
 
-- **Sensor:** 45MP back-illuminated full-frame BSI-CMOS
-- **Video:** 8K RAW recording
-- **Stabilisation:** 10-stop In-Body Image Stabilisation (IBIS)
-- **Autofocus:** AI Eye-Detection with subject tracking
-- **Burst:** 120 fps continuous shooting
-- **Weather Sealing:** IP54 rated magnesium alloy body
-- **Price:** $2,499.00 (RRP $2,999.00 — Save $500)
-- **Rating:** 4.8★ based on 247 verified reviews
+| Spec | Value |
+|---|---|
+| Sensor | 45MP Full-Frame BSI-CMOS (36 × 24mm) |
+| Video | 8K RAW @ 30fps / 4K @ 120fps (no crop) |
+| Autofocus | 1,053-point Hybrid Phase/Contrast + AI Eye-Detection |
+| Stabilisation | 10-stop 5-axis In-Body IBIS |
+| Burst | 120 fps (electronic) / 30 fps (mechanical) |
+| ISO | 100 – 102,400 (expandable 204,800) |
+| Shutter | 1/8000s – 30s (electronic: 1/32000s) |
+| Weather | IP54 magnesium alloy body |
+| Battery | ~520 shots CIPA / ~1,800 eco mode |
+| Weight | 743g body only |
+| Price | $2,499.00 (RRP $2,999.00 — **Save $500**) |
+| Rating | ⭐ 4.8 / 247 verified reviews |
 
 ---
 
