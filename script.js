@@ -436,8 +436,15 @@ const RELATED_PRODUCTS = {
 
 document.querySelectorAll('.related-cta').forEach(btn => {
   btn.addEventListener('click', () => {
-    const product = RELATED_PRODUCTS[btn.id];
-    if (!product) return;
+    let product = RELATED_PRODUCTS[btn.id];
+    if (!product) {
+      if (!btn.dataset.name) return;
+      product = {
+        name: btn.dataset.name,
+        price: parseInt(btn.dataset.price),
+        img: btn.closest('.related-card').querySelector('img').getAttribute('src')
+      };
+    }
 
     const existing = cartItems.find(i => i.name === product.name);
     if (existing) {

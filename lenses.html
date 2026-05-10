@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensCraft â€“ Lumina X1 Pro Full-Frame Mirrorless Camera</title>
+  <meta name="description" content="Shop the LensCraft Lumina X1 Pro â€“ a 45MP full-frame mirrorless camera with 8K video, AI autofocus, and weather sealing. Free shipping & 2-year warranty." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== STICKY CART BAR ===== -->
+  <div class="sticky-bar" id="sticky-bar" aria-hidden="true">
+    <div class="container sticky-bar-inner">
+      <div class="sticky-bar-product">
+        <img src="camera_main.png" alt="Lumina X1 Pro" class="sticky-bar-img" />
+        <div>
+          <span class="sticky-bar-name">Lumina X1 Pro</span>
+          <span class="sticky-bar-price">â‚¹2,08,999</span>
+        </div>
+      </div>
+      <div class="sticky-bar-actions">
+        <div class="stars" style="font-size:13px">
+          <span class="star filled">â˜…</span><span class="star filled">â˜…</span><span class="star filled">â˜…</span><span class="star filled">â˜…</span><span class="star half">â˜…</span>
+          <span style="color:var(--clr-muted);margin-left:4px;font-size:12px">(247)</span>
+        </div>
+        <button class="btn-primary sticky-bar-btn" id="sticky-add-to-cart" onclick="stickyAddToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LIGHTBOX MODAL ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">âœ•</button>
+    <img src="camera_main.png" alt="Lumina X1 Pro enlarged view" id="lightbox-img" class="lightbox-img" />
+    <div class="lightbox-thumbs" id="lightbox-thumbs">
+      <button class="lb-thumb active" data-src="camera_main.png"><img src="camera_main.png" alt="Front" /></button>
+      <button class="lb-thumb" data-src="camera_thumb2.png"><img src="camera_thumb2.png" alt="Lens" /></button>
+      <button class="lb-thumb" data-src="camera_thumb3.png"><img src="camera_thumb3.png" alt="Side" /></button>
+      <button class="lb-thumb" data-src="camera_thumb4.png"><img src="camera_thumb4.png" alt="Rear" /></button>
+    </div>
+  </div>
+  <div class="lightbox-overlay" id="lightbox-overlay"></div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon">ðŸ›’</span>
+    <div class="toast-text">
+      <strong>Added to cart!</strong>
+      <span id="toast-sub">Lumina X1 Pro â€” Midnight Black</span>
+    </div>
+    <button class="toast-view" id="toast-view" onclick="openCartPanel()">View Cart â†’</button>
+  </div>
+
+  <!-- ===== CART SIDEBAR PANEL ===== -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCartPanel()"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Shopping cart" role="dialog">
+    <div class="cart-panel-header">
+      <h2 class="cart-panel-title">ðŸ›’ Your Cart</h2>
+      <button class="cart-panel-close" id="cart-panel-close" onclick="closeCartPanel()" aria-label="Close cart">âœ•</button>
+    </div>
+    <div class="cart-panel-body" id="cart-panel-body">
+      <!-- Items populated by JS -->
+    </div>
+    <div class="cart-panel-footer" id="cart-panel-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">â‚¹0</span>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:16px" id="checkout-btn">Proceed to Checkout â†’</button>
+      <button class="btn-secondary" style="width:100%;margin-top:10px" onclick="closeCartPanel()">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="site-header">
+    <div class="header-inner container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo-icon">â—‰</span>
+        <span class="logo-text">LensCraft</span>
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" id="nav-cameras">Cameras</a>
+        <a href="lenses.html" class="nav-link" id="nav-lenses">Lenses</a>
+        <a href="accessories.html" class="nav-link" id="nav-accessories">Accessories</a>
+        <a href="deals.html" class="nav-link" id="nav-deals">Deals</a>
+        <a href="learn.html" class="nav-link" id="nav-learn">Learn</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="search-btn" aria-label="Search">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="icon-btn" id="wishlist-btn" aria-label="Wishlist">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" id="cart-btn" aria-label="Cart">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cart-count">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== BREADCRUMB ===== -->  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb container" id="breadcrumb">
+    <a href="index.html">Home</a> <span>/</span>
+    <span class="bc-current">Lenses</span>
+  </div>
+
+  <section class="container" style="padding: 40px 24px; min-height: 50vh;">
+    <h1 class="section-title">Professional Lenses</h1>
+    <div class="related-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 30px;">
+      <article class="related-card">
+        <div class="related-img-wrap">
+          <img src="camera_thumb2.png" alt="Lens" class="related-img" />
+          <span class="related-badge">Popular</span>
+        </div>
+        <div class="related-info">
+          <span class="related-brand">LensCraft</span>
+          <h3 class="related-name">LC 50mm f/1.2 Prime</h3>
+          <div class="related-stars">★★★★★ <span>(312)</span></div>
+          <div class="related-price-row">
+            <span class="related-price">₹1,08,499</span>
+          </div>
+          <button class="btn-secondary related-cta" id="lens-1" data-name="LC 50mm f/1.2 Prime" data-price="108499">Add to Cart</button>
+        </div>
+      </article>
+      <article class="related-card">
+        <div class="related-img-wrap">
+          <img src="camera_thumb2.png" alt="Lens" class="related-img" />
+        </div>
+        <div class="related-info">
+          <span class="related-brand">LensCraft</span>
+          <h3 class="related-name">LC 24-70mm f/2.8 Zoom</h3>
+          <div class="related-stars">★★★★★ <span>(184)</span></div>
+          <div class="related-price-row">
+            <span class="related-price">₹1,85,999</span>
+          </div>
+          <button class="btn-secondary related-cta" id="lens-2" data-name="LC 24-70mm f/2.8 Zoom" data-price="185999">Add to Cart</button>
+        </div>
+      </article>
+    </div>
+  </section><!-- ===== NEWSLETTER ===== -->
+  <!-- reveal applied below -->
+  <section class="newsletter-section reveal" id="newsletter-section">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2>Stay in the Frame</h2>
+        <p>Get early access to new gear drops, exclusive deals, and photography tips from the pros.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+        <input type="email" id="newsletter-email" placeholder="Enter your email address" class="newsletter-input" required aria-label="Email address" />
+        <button type="submit" class="btn-primary" id="newsletter-submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col" id="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">â—‰</span>
+          <span class="logo-text">LensCraft</span>
+        </a>
+        <p class="footer-tagline">Capturing the world, one frame at a time. Premium cameras and gear for every vision.</p>
+        <div class="social-links" id="social-links">
+          <a href="#" class="social-link" id="social-instagram" aria-label="Instagram">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-youtube" aria-label="YouTube">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.94A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-twitter" aria-label="Twitter/X">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-facebook" aria-label="Facebook">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col" id="footer-shop">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#" id="footer-mirrorless">Mirrorless Cameras</a></li>
+          <li><a href="#" id="footer-dslr">DSLR Cameras</a></li>
+          <li><a href="#" id="footer-lenses">Lenses</a></li>
+          <li><a href="#" id="footer-tripods">Tripods & Supports</a></li>
+          <li><a href="#" id="footer-bags">Camera Bags</a></li>
+          <li><a href="#" id="footer-filters">Filters & Lighting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" id="footer-support">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#" id="footer-help">Help Center</a></li>
+          <li><a href="#" id="footer-track">Track Your Order</a></li>
+          <li><a href="#" id="footer-returns">Returns & Exchanges</a></li>
+          <li><a href="#" id="footer-warranty-link">Warranty Claims</a></li>
+          <li><a href="#" id="footer-contact">Contact Us</a></li>
+          <li><a href="#" id="footer-repair">Repair Services</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" id="footer-company">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" id="footer-about">About LensCraft</a></li>
+          <li><a href="#" id="footer-blog">Photography Blog</a></li>
+          <li><a href="#" id="footer-careers">Careers</a></li>
+          <li><a href="#" id="footer-press">Press & Media</a></li>
+          <li><a href="#" id="footer-privacy">Privacy Policy</a></li>
+          <li><a href="#" id="footer-terms">Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 LensCraft Inc. All rights reserved.</p>
+        <div class="payment-icons" id="payment-icons" aria-label="Accepted payment methods">
+          <span class="payment-chip" id="pay-visa">VISA</span>
+          <span class="payment-chip" id="pay-mc">MC</span>
+          <span class="payment-chip" id="pay-amex">AMEX</span>
+          <span class="payment-chip" id="pay-paypal">PayPal</span>
+          <span class="payment-chip" id="pay-apple">Apple Pay</span>
+          <span class="payment-chip" id="pay-google">Google Pay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

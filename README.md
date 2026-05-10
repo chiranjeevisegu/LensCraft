@@ -26,6 +26,18 @@
 ### Empty Cart State
 ![Cart panel open showing empty cart with icon and Continue Shopping button](screenshots/cart_panel.png)
 
+### Lenses Catalog
+![Lenses page with a grid of professional lenses](screenshots/lenses_page.png)
+
+### Accessories Catalog
+![Accessories page showing battery grips and other gear](screenshots/accessories_page.png)
+
+### Flash Deals
+![Deals page showcasing limited time flash sales on cameras](screenshots/deals_page.png)
+
+### Photography Blog (Learn)
+![Learn page featuring photography guides and blog posts](screenshots/learn_page.png)
+
 ### Urgency Bar — Live Social Proof
 ![Live viewer count with pulsing green dot and low-stock warning below the price](screenshots/urgency.png)
 
@@ -82,6 +94,7 @@
 | **Shipping & Warranty** | Two detailed info cards |
 | **❓ FAQ Accordion** | 5 collapsible Q&As with gold chevron, one-at-a-time open logic |
 | **🛍️ Related Products** | **5-card** cross-sell grid — Lumina Z5, LC 50mm f/1.2, Battery Grip BG-X1, Lumina Z3, Lumina Pro S |
+| **🌐 Navigation Pages** | Lenses, Accessories, Deals, and Learn pages fully functional with shared layout and cart support |
 | **Newsletter** | Email subscribe form |
 | **Footer** | 4-column links, 4 social icons, 6 payment chips, copyright |
 
@@ -118,6 +131,10 @@ LensCraft/
 ├── camera_thumb4.png   # Rear view thumbnail
 ├── camera_z3.png       # AI-generated Lumina Z3 product image
 ├── camera_pros.png     # AI-generated Lumina Pro S product image
+├── lenses.html         # Lenses catalog page
+├── accessories.html    # Accessories catalog page
+├── deals.html          # Flash deals page
+├── learn.html          # Photography blog page
 └── screenshots/
     ├── hero.png             # Product hero section
     ├── cart_with_item.png   # Cart sidebar with item inside
@@ -131,6 +148,10 @@ LensCraft/
     ├── reviews.png          # Customer reviews
     ├── shipping.png         # Shipping & Warranty cards
     ├── faq.png              # FAQ accordion
+    ├── lenses_page.png      # Lenses catalog screenshot
+    ├── accessories_page.png # Accessories catalog screenshot
+    ├── deals_page.png       # Flash deals screenshot
+    ├── learn_page.png       # Photography blog screenshot
     ├── related.png          # Related products grid
     ├── toast.png            # Toast notification
     └── footer.png           # Newsletter & Footer
