@@ -244,3 +244,91 @@ bars.forEach(bar => {
   bar.style.animationPlayState = 'paused';
   barObserver.observe(bar);
 });
+
+// ==============================
+// LIVE VIEWER COUNT (FOMO)
+// ==============================
+const viewerEl = document.getElementById('viewer-count');
+let viewers = 23;
+
+setInterval(() => {
+  const delta = Math.random() < 0.5 ? 1 : -1;
+  viewers = Math.min(41, Math.max(11, viewers + delta));
+  if (viewerEl) viewerEl.textContent = viewers;
+}, 4000);
+
+// ==============================
+// SPECS TABLE TOGGLE
+// ==============================
+const specsBtn = document.getElementById('specs-toggle-btn');
+const specsWrap = document.getElementById('specs-table');
+
+if (specsBtn && specsWrap) {
+  specsBtn.addEventListener('click', () => {
+    const isOpen = specsWrap.classList.toggle('open');
+    specsBtn.setAttribute('aria-expanded', isOpen);
+    specsWrap.setAttribute('aria-hidden', !isOpen);
+  });
+}
+
+// ==============================
+// FAQ ACCORDION
+// ==============================
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = document.getElementById(btn.getAttribute('aria-controls'));
+    const isOpen = answer.classList.contains('open');
+
+    document.querySelectorAll('.faq-answer').forEach(a => {
+      a.classList.remove('open');
+      a.setAttribute('aria-hidden', 'true');
+    });
+    document.querySelectorAll('.faq-question').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      answer.classList.add('open');
+      answer.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// ==============================
+// RELATED PRODUCTS CART
+// ==============================
+document.querySelectorAll('.related-cta').forEach(btn => {
+  btn.addEventListener('click', () => {
+    cartCount++;
+    cartBadge.textContent = cartCount;
+    const orig = btn.textContent;
+    btn.textContent = '\u2713 Added!';
+    btn.style.background = 'linear-gradient(135deg, #3dd68c, #2bc57a)';
+    btn.style.borderColor = '#3dd68c';
+    btn.style.color = '#0d0f14';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 1800);
+  });
+});
+
+// ==============================
+// BACK TO TOP
+// ==============================
+const backToTopBtn = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTopBtn.classList.add('visible');
+  } else {
+    backToTopBtn.classList.remove('visible');
+  }
+});
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});

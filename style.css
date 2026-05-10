@@ -1192,6 +1192,356 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .inbox-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ---------- Urgency Bar ---------- */
+.urgency-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 14px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.urgency-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--clr-muted);
+  font-weight: 500;
+}
+
+.urgency-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-green);
+  box-shadow: 0 0 0 0 rgba(61,214,140,0.4);
+  animation: pulse-dot 1.8s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(61,214,140,0.4); }
+  70%  { box-shadow: 0 0 0 7px rgba(61,214,140,0); }
+  100% { box-shadow: 0 0 0 0 rgba(61,214,140,0); }
+}
+
+.urgency-stock {
+  color: var(--clr-accent);
+}
+
+.urgency-stock svg { color: var(--clr-accent); }
+
+/* ---------- Specs Toggle ---------- */
+.specs-toggle-wrap {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.specs-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition);
+}
+
+.specs-toggle-btn:hover { background: var(--clr-surface2); }
+.specs-toggle-btn[aria-expanded="true"] { border-bottom-color: var(--clr-border); }
+
+.specs-toggle-btn .chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.specs-toggle-btn[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.specs-table-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.specs-table-wrap.open {
+  max-height: 800px;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.specs-table td {
+  padding: 9px 18px;
+  color: var(--clr-muted);
+  border-bottom: 1px solid var(--clr-border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.specs-table td:first-child {
+  width: 40%;
+  color: var(--clr-text);
+  font-weight: 500;
+}
+
+.specs-table td.spec-cat {
+  background: rgba(232,160,69,0.06);
+  color: var(--clr-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+}
+
+.specs-table tr:last-child td { border-bottom: none; }
+
+/* ---------- FAQ Accordion ---------- */
+.faq-section {
+  padding: 70px 24px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+}
+
+.faq-item {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.faq-item:has(.faq-question[aria-expanded="true"]) {
+  border-color: rgba(232,160,69,0.3);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--clr-text);
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  transition: background var(--transition);
+  background: transparent;
+}
+
+.faq-question:hover { background: var(--clr-surface2); }
+
+.faq-chevron {
+  flex-shrink: 0;
+  color: var(--clr-accent);
+  transition: transform var(--transition);
+}
+
+.faq-question[aria-expanded="true"] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding var(--transition);
+  padding: 0 20px;
+}
+
+.faq-answer.open {
+  max-height: 200px;
+  padding: 0 20px 18px;
+}
+
+.faq-answer p {
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.75;
+  border-top: 1px solid var(--clr-border);
+  padding-top: 16px;
+}
+
+/* ---------- Related Products ---------- */
+.related-section {
+  padding: 70px 24px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.related-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.related-card:hover {
+  border-color: rgba(232,160,69,0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3), var(--shadow-glow);
+}
+
+.related-img-wrap {
+  position: relative;
+  background: var(--clr-surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  min-height: 200px;
+}
+
+.related-img {
+  max-height: 150px;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.related-card:hover .related-img { transform: scale(1.06); }
+
+.related-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--clr-gold-grad);
+  color: #0d0f14;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.new-badge {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.related-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.related-brand {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.related-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.related-stars {
+  font-size: 13px;
+  color: var(--clr-accent);
+}
+
+.related-stars span {
+  color: var(--clr-muted);
+  font-size: 12px;
+}
+
+.related-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.related-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--clr-gold-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.related-orig {
+  font-size: 14px;
+  color: var(--clr-muted2);
+  text-decoration: line-through;
+}
+
+.related-cta {
+  width: 100% !important;
+  flex: none !important;
+  margin-top: 8px;
+  padding: 11px 16px !important;
+  font-size: 13px !important;
+}
+
+/* ---------- Back to Top ---------- */
+.back-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--clr-gold-grad);
+  color: #0d0f14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  box-shadow: 0 4px 20px rgba(232,160,69,0.35);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(232,160,69,0.5);
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .product-section { grid-template-columns: 1fr; gap: 36px; }
   .reviews-layout { grid-template-columns: 1fr; }
@@ -1202,6 +1552,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .newsletter-inner { flex-direction: column; align-items: flex-start; }
   .newsletter-form { max-width: 100%; width: 100%; }
   .sticky-bar-actions .stars { display: none; }
+  .related-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 560px) {
@@ -1214,4 +1565,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .inbox-grid { grid-template-columns: repeat(2, 1fr); }
   .toast { min-width: calc(100vw - 48px); }
   .spec-value { font-size: 28px; }
+  .related-grid { grid-template-columns: 1fr; }
+  .back-to-top { bottom: 80px; right: 16px; }
 }
