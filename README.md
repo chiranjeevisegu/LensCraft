@@ -12,7 +12,19 @@
 ## 📸 Screenshots
 
 ### Hero — Product Gallery & Info
-![Hero section showing Lumina X1 Pro camera with price, rating, color selector and Add to Cart CTA](screenshots/hero.png)
+![Hero section showing Lumina X1 Pro camera with ₹ price, rating, color selector and Add to Cart CTA](screenshots/hero.png)
+
+### Cart Sidebar Panel — Slide-in Cart
+![Cart sidebar panel sliding in from the right with item, quantity, and subtotal in ₹](screenshots/cart_with_item.png)
+
+### Add-to-Cart Toast Notification
+![Animated toast notification sliding up from the bottom showing item added to cart with View Cart button](screenshots/toast_notification.png)
+
+### Related Products — You May Also Like (5 products)
+![Five product cards including Lumina Z5, 50mm Prime, Battery Grip, Lumina Z3, and Lumina Pro S](screenshots/related_products.png)
+
+### Empty Cart State
+![Cart panel open showing empty cart with icon and Continue Shopping button](screenshots/cart_panel.png)
 
 ### Urgency Bar — Live Social Proof
 ![Live viewer count with pulsing green dot and low-stock warning below the price](screenshots/urgency.png)
@@ -34,12 +46,6 @@
 
 ### FAQ Accordion — Frequently Asked Questions
 ![FAQ section with first question expanded showing smooth accordion animation and gold border highlight](screenshots/faq.png)
-
-### Related Products — You May Also Like
-![Three product cards (Lumina Z5, 50mm Prime lens, Battery Grip) with hover-lift effect and Add to Cart buttons](screenshots/related.png)
-
-### Toast Notification — Add to Cart Feedback
-![Animated toast notification sliding up from the bottom after clicking Add to Cart](screenshots/toast.png)
 
 ### Newsletter & Footer
 ![Newsletter subscription section and 4-column footer with social icons and payment methods](screenshots/footer.png)
@@ -75,26 +81,27 @@
 | **Customer Reviews** | Animated rating bars + 3 verified review cards with gradient avatars |
 | **Shipping & Warranty** | Two detailed info cards |
 | **❓ FAQ Accordion** | 5 collapsible Q&As with gold chevron, one-at-a-time open logic |
-| **🛍️ Related Products** | 3-card cross-sell grid with hover lift, badges, rating, and add-to-cart |
+| **🛍️ Related Products** | **5-card** cross-sell grid — Lumina Z5, LC 50mm f/1.2, Battery Grip BG-X1, Lumina Z3, Lumina Pro S |
 | **Newsletter** | Email subscribe form |
 | **Footer** | 4-column links, 4 social icons, 6 payment chips, copyright |
 
 ### ⚡ Interactivity
 | Feature | Behaviour |
 |---|---|
-| **Toast Notification** | Bounces up from bottom with spring animation on cart add — shows colour × qty |
+| **Toast Notification** | Bounces up from bottom with spring animation on cart add — shows colour × qty; "View Cart" opens the cart panel |
+| **🛒 Cart Sidebar Panel** | Slide-in panel from the right: shows all items, qty controls (+/−), remove button, subtotal in ₹ |
 | **Sticky Cart Bar** | Slides in from the top when you scroll past the hero — always-visible CTA |
 | **Lightbox Modal** | Click zoom button or double-click image → fullscreen modal with thumbnail strip; `Esc` to close |
 | **Live Urgency Counter** | "X people viewing" number increments/decrements randomly every 4 seconds |
 | **Specs Table Toggle** | Click to expand/collapse full 16-row tech spec table with smooth animation |
 | **FAQ Accordion** | Click any question → smooth expand, gold border on open item, one-at-a-time |
-| **Related Products Cart** | Add-to-cart on cross-sell cards increments header badge + green flash |
+| **Related Products Cart** | 5 cross-sell cards — add-to-cart increments header badge, shows toast, adds to sidebar |
 | **Back-to-Top Button** | Gold gradient circle appears after 400px scroll, smooth-scrolls to top |
 | **Scroll Reveal** | Sections fade + slide up on viewport enter via `IntersectionObserver` |
 | **Staggered Inbox** | "What's in the Box" cards enter with 60 ms delay between each |
 | **Rating Bar Animation** | Bars animate from 0% to their value only when scrolled into view |
 | **Thumbnail Switcher** | Fade-transition on main image swap |
-| **Wishlist Toggle** | Heart fills red on click |
+| **Wishlist Toggle** | Heart fills red on click — synced with header wishlist icon |
 
 ---
 
@@ -109,18 +116,24 @@ LensCraft/
 ├── camera_thumb2.png   # Lens thumbnail
 ├── camera_thumb3.png   # Side view thumbnail
 ├── camera_thumb4.png   # Rear view thumbnail
+├── camera_z3.png       # AI-generated Lumina Z3 product image
+├── camera_pros.png     # AI-generated Lumina Pro S product image
 └── screenshots/
-    ├── hero.png        # Product hero section
-    ├── urgency.png     # Live urgency bar
-    ├── specs.png       # Animated spec strip
-    ├── specs_table.png # Collapsible full specs table
-    ├── inbox.png       # What's in the Box grid
-    ├── reviews.png     # Customer reviews
-    ├── shipping.png    # Shipping & Warranty cards
-    ├── faq.png         # FAQ accordion
-    ├── related.png     # Related products grid
-    ├── toast.png       # Toast notification
-    └── footer.png      # Newsletter & Footer
+    ├── hero.png             # Product hero section
+    ├── cart_with_item.png   # Cart sidebar with item inside
+    ├── cart_panel.png       # Empty cart panel
+    ├── toast_notification.png # Toast on add to cart
+    ├── related_products.png # All 5 related products
+    ├── urgency.png          # Live urgency bar
+    ├── specs.png            # Animated spec strip
+    ├── specs_table.png      # Collapsible full specs table
+    ├── inbox.png            # What's in the Box grid
+    ├── reviews.png          # Customer reviews
+    ├── shipping.png         # Shipping & Warranty cards
+    ├── faq.png              # FAQ accordion
+    ├── related.png          # Related products grid
+    ├── toast.png            # Toast notification
+    └── footer.png           # Newsletter & Footer
 ```
 
 ---
@@ -175,7 +188,7 @@ Double-click `index.html` — works with no server for basic viewing.
 | Weather | IP54 magnesium alloy body |
 | Battery | ~520 shots CIPA / ~1,800 eco mode |
 | Weight | 743g body only |
-| Price | $2,499.00 (RRP $2,999.00 — **Save $500**) |
+| Price | ₹2,08,999 (MRP ₹2,49,999 — **Save ₹41,000**) |
 | Rating | ⭐ 4.8 / 247 verified reviews |
 
 ---

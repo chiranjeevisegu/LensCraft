@@ -19,7 +19,7 @@
         <img src="camera_main.png" alt="Lumina X1 Pro" class="sticky-bar-img" />
         <div>
           <span class="sticky-bar-name">Lumina X1 Pro</span>
-          <span class="sticky-bar-price">$2,499.00</span>
+          <span class="sticky-bar-price">₹2,08,999</span>
         </div>
       </div>
       <div class="sticky-bar-actions">
@@ -52,8 +52,28 @@
       <strong>Added to cart!</strong>
       <span id="toast-sub">Lumina X1 Pro — Midnight Black</span>
     </div>
-    <a href="#" class="toast-view" id="toast-view">View Cart →</a>
+    <button class="toast-view" id="toast-view" onclick="openCartPanel()">View Cart →</button>
   </div>
+
+  <!-- ===== CART SIDEBAR PANEL ===== -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCartPanel()"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Shopping cart" role="dialog">
+    <div class="cart-panel-header">
+      <h2 class="cart-panel-title">🛒 Your Cart</h2>
+      <button class="cart-panel-close" id="cart-panel-close" onclick="closeCartPanel()" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-panel-body" id="cart-panel-body">
+      <!-- Items populated by JS -->
+    </div>
+    <div class="cart-panel-footer" id="cart-panel-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">₹0</span>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:16px" id="checkout-btn">Proceed to Checkout →</button>
+      <button class="btn-secondary" style="width:100%;margin-top:10px" onclick="closeCartPanel()">Continue Shopping</button>
+    </div>
+  </aside>
 
   <!-- ===== HEADER ===== -->
   <header class="header" id="site-header">
@@ -142,9 +162,9 @@
 
       <!-- Price -->
       <div class="price-block" id="price-block">
-        <span class="price-current" id="current-price">$2,499.00</span>
-        <span class="price-original" id="original-price">$2,999.00</span>
-        <span class="savings-badge" id="savings-badge">Save $500</span>
+        <span class="price-current" id="current-price">₹2,08,999</span>
+        <span class="price-original" id="original-price">₹2,49,999</span>
+        <span class="savings-badge" id="savings-badge">Save ₹41,000</span>
       </div>
 
       <!-- Urgency Bar -->
@@ -400,8 +420,8 @@
         <h3>Shipping Details</h3>
         <ul class="info-list">
           <li><strong>Free Standard Shipping</strong> — 5–7 business days</li>
-          <li><strong>Express Shipping</strong> — 2 business days ($14.99)</li>
-          <li><strong>Overnight Delivery</strong> — Next day ($29.99)</li>
+          <li><strong>Express Shipping</strong> — 2 business days (₹1,299)</li>
+          <li><strong>Overnight Delivery</strong> — Next day (₹2,499)</li>
           <li>Orders placed before 2 PM EST ship same day</li>
           <li>Full tracking provided via email & SMS</li>
           <li>Free returns within 30 days — no questions asked</li>
@@ -415,7 +435,7 @@
         <h3>Warranty Coverage</h3>
         <ul class="info-list">
           <li><strong>2-Year Manufacturer Warranty</strong> — all defects covered</li>
-          <li><strong>LensCraft Care+</strong> — extend to 4 years for $149</li>
+          <li><strong>LensCraft Care+</strong> — extend to 4 years for ₹12,499</li>
           <li>Accidental damage protection available</li>
           <li>24/7 priority support via phone, chat, email</li>
           <li>Free sensor cleaning (first year)</li>
@@ -499,8 +519,8 @@
           <h3 class="related-name">Lumina Z5</h3>
           <div class="related-stars">★★★★★ <span>(189)</span></div>
           <div class="related-price-row">
-            <span class="related-price">$1,799.00</span>
-            <span class="related-orig">$1,999.00</span>
+            <span class="related-price">₹1,49,999</span>
+            <span class="related-orig">₹1,66,999</span>
           </div>
           <button class="btn-secondary related-cta" id="related-cart-1">Add to Cart</button>
         </div>
@@ -516,7 +536,7 @@
           <h3 class="related-name">LC 50mm f/1.2 Prime</h3>
           <div class="related-stars">★★★★★ <span>(312)</span></div>
           <div class="related-price-row">
-            <span class="related-price">$1,299.00</span>
+            <span class="related-price">₹1,08,499</span>
           </div>
           <button class="btn-secondary related-cta" id="related-cart-2">Add to Cart</button>
         </div>
@@ -531,10 +551,43 @@
           <h3 class="related-name">Battery Grip BG-X1</h3>
           <div class="related-stars">★★★★<span style="opacity:.3">★</span> <span>(94)</span></div>
           <div class="related-price-row">
-            <span class="related-price">$349.00</span>
-            <span class="related-orig">$399.00</span>
+            <span class="related-price">₹29,199</span>
+            <span class="related-orig">₹33,299</span>
           </div>
           <button class="btn-secondary related-cta" id="related-cart-3">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="related-card" id="related-4">
+        <div class="related-img-wrap">
+          <img src="camera_z3.png" alt="LensCraft Lumina Z3 compact mirrorless camera" class="related-img" />
+          <span class="related-badge">Best Seller</span>
+        </div>
+        <div class="related-info">
+          <span class="related-brand">LensCraft</span>
+          <h3 class="related-name">Lumina Z3</h3>
+          <div class="related-stars">★★★★★ <span>(421)</span></div>
+          <div class="related-price-row">
+            <span class="related-price">₹89,999</span>
+            <span class="related-orig">₹99,999</span>
+          </div>
+          <button class="btn-secondary related-cta" id="related-cart-4" data-name="Lumina Z3" data-price="89999">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="related-card" id="related-5">
+        <div class="related-img-wrap">
+          <img src="camera_pros.png" alt="LensCraft Lumina Pro S professional camera" class="related-img" />
+          <span class="related-badge new-badge">New</span>
+        </div>
+        <div class="related-info">
+          <span class="related-brand">LensCraft</span>
+          <h3 class="related-name">Lumina Pro S</h3>
+          <div class="related-stars">★★★★★ <span>(87)</span></div>
+          <div class="related-price-row">
+            <span class="related-price">₹2,99,999</span>
+          </div>
+          <button class="btn-secondary related-cta" id="related-cart-5" data-name="Lumina Pro S" data-price="299999">Add to Cart</button>
         </div>
       </article>
 

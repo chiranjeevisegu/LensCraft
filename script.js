@@ -3,6 +3,108 @@
    =========================== */
 
 // ==============================
+// CART STATE
+// ==============================
+let cartItems = []; // { id, name, price, color, qty, img }
+let cartIdCounter = 0;
+
+function formatRupee(amount) {
+  return '₹' + amount.toLocaleString('en-IN');
+}
+
+// ==============================
+// CART PANEL OPEN / CLOSE
+// ==============================
+const cartPanel = document.getElementById('cart-panel');
+const cartOverlay = document.getElementById('cart-overlay');
+const cartPanelBody = document.getElementById('cart-panel-body');
+const cartSubtotalEl = document.getElementById('cart-subtotal');
+
+function openCartPanel() {
+  cartPanel.classList.add('open');
+  cartOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  renderCartPanel();
+}
+
+function closeCartPanel() {
+  cartPanel.classList.remove('open');
+  cartOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cart-btn').addEventListener('click', openCartPanel);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeCartPanel();
+  }
+});
+
+// ==============================
+// CART RENDER
+// ==============================
+function renderCartPanel() {
+  if (cartItems.length === 0) {
+    cartPanelBody.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some cameras to get started!</p>
+      </div>`;
+    cartSubtotalEl.textContent = '₹0';
+    return;
+  }
+
+  cartPanelBody.innerHTML = cartItems.map(item => `
+    <div class="cart-item" id="cart-item-${item.id}">
+      <img src="${item.img}" alt="${item.name}" class="cart-item-img" />
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.color} · Qty: ${item.qty}</div>
+        <div class="cart-item-price-row">
+          <span class="cart-item-price">${formatRupee(item.price * item.qty)}</span>
+          <div class="cart-item-qty">
+            <button onclick="changeItemQty(${item.id}, -1)" style="background:var(--clr-surface);border:1px solid var(--clr-border);width:26px;height:26px;border-radius:6px;color:var(--clr-muted);cursor:pointer;font-size:16px;">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeItemQty(${item.id}, 1)" style="background:var(--clr-surface);border:1px solid var(--clr-border);width:26px;height:26px;border-radius:6px;color:var(--clr-muted);cursor:pointer;font-size:16px;">+</button>
+          </div>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeCartItem(${item.id})" aria-label="Remove item">✕</button>
+    </div>
+  `).join('');
+
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+  cartSubtotalEl.textContent = formatRupee(subtotal);
+}
+
+function changeItemQty(id, delta) {
+  const item = cartItems.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  updateCartBadge();
+  renderCartPanel();
+}
+
+function removeCartItem(id) {
+  cartItems = cartItems.filter(i => i.id !== id);
+  updateCartBadge();
+  renderCartPanel();
+}
+
+// ==============================
+// CART BADGE
+// ==============================
+const cartBadge = document.getElementById('cart-count');
+
+function updateCartBadge() {
+  const total = cartItems.reduce((sum, i) => sum + i.qty, 0);
+  cartBadge.textContent = total;
+}
+
+// ==============================
 // THUMBNAIL SWITCHER
 // ==============================
 const mainImg = document.getElementById('main-product-img');
@@ -57,31 +159,48 @@ const toast = document.getElementById('toast');
 const toastSub = document.getElementById('toast-sub');
 let toastTimer;
 
-function showToast() {
-  toastSub.textContent = `Lumina X1 Pro \u2014 ${selectedColor} \xd7${qty}`;
+function showToast(name, color, quantity) {
+  const n = name || 'Lumina X1 Pro';
+  const c = color || selectedColor;
+  const q = quantity || qty;
+  toastSub.textContent = `${n} — ${c} ×${q}`;
   clearTimeout(toastTimer);
   toast.classList.add('show');
   toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
 }
 
 // ==============================
-// ADD TO CART
+// ADD TO CART (Main Product)
 // ==============================
-let cartCount = 2;
-const cartBadge = document.getElementById('cart-count');
+const MAIN_PRICE = 208999; // ₹2,08,999
+
 const addToCartBtn = document.getElementById('add-to-cart-btn');
 
 function doAddToCart(btn) {
-  cartCount += qty;
-  cartBadge.textContent = cartCount;
+  // Check if same color already in cart
+  const existing = cartItems.find(i => i.name === 'Lumina X1 Pro' && i.color === selectedColor);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cartItems.push({
+      id: ++cartIdCounter,
+      name: 'Lumina X1 Pro',
+      price: MAIN_PRICE,
+      color: selectedColor,
+      qty: qty,
+      img: 'camera_main.png'
+    });
+  }
+  updateCartBadge();
+
   const original = btn.textContent;
-  btn.textContent = '\u2713 Added!';
+  btn.textContent = '✓ Added!';
   btn.style.background = 'linear-gradient(135deg, #3dd68c, #2bc57a)';
   setTimeout(() => {
     btn.textContent = original;
     btn.style.background = '';
   }, 1800);
-  showToast();
+  showToast('Lumina X1 Pro', selectedColor, qty);
 }
 
 addToCartBtn.addEventListener('click', () => doAddToCart(addToCartBtn));
@@ -104,6 +223,19 @@ wishlistAddBtn.addEventListener('click', () => {
   wishlistAddBtn.querySelector('svg').setAttribute('fill', wishlisted ? '#f05c5c' : 'none');
 });
 
+// Header wishlist btn
+document.getElementById('wishlist-btn').addEventListener('click', () => {
+  wishlistAddBtn.click();
+});
+
+// Header search btn
+document.getElementById('search-btn').addEventListener('click', () => {
+  const q = prompt('Search LensCraft...');
+  if (q && q.trim()) {
+    alert(`Searching for: "${q.trim()}"\n(This is a demo — search results would appear here)`);
+  }
+});
+
 // ==============================
 // NEWSLETTER
 // ==============================
@@ -111,7 +243,7 @@ function handleNewsletterSubmit(e) {
   e.preventDefault();
   const input = document.getElementById('newsletter-email');
   const btn = document.getElementById('newsletter-submit');
-  btn.textContent = '\u2713 Subscribed!';
+  btn.textContent = '✓ Subscribed!';
   btn.style.background = 'linear-gradient(135deg, #3dd68c, #2bc57a)';
   input.value = '';
   setTimeout(() => {
@@ -194,10 +326,6 @@ lbThumbs.forEach(thumb => {
       lightboxImg.style.opacity = '1';
     }, 160);
   });
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeLightbox();
 });
 
 // ==============================
@@ -298,12 +426,36 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 // ==============================
 // RELATED PRODUCTS CART
 // ==============================
+const RELATED_PRODUCTS = {
+  'related-cart-1': { name: 'Lumina Z5',       price: 149999, img: 'camera_thumb3.png' },
+  'related-cart-2': { name: 'LC 50mm f/1.2',   price: 108499, img: 'camera_thumb2.png' },
+  'related-cart-3': { name: 'Battery Grip BG-X1', price: 29199, img: 'camera_thumb4.png' },
+  'related-cart-4': { name: 'Lumina Z3',        price: 89999,  img: 'camera_z3.png' },
+  'related-cart-5': { name: 'Lumina Pro S',     price: 299999, img: 'camera_pros.png' },
+};
+
 document.querySelectorAll('.related-cta').forEach(btn => {
   btn.addEventListener('click', () => {
-    cartCount++;
-    cartBadge.textContent = cartCount;
+    const product = RELATED_PRODUCTS[btn.id];
+    if (!product) return;
+
+    const existing = cartItems.find(i => i.name === product.name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cartItems.push({
+        id: ++cartIdCounter,
+        name: product.name,
+        price: product.price,
+        color: 'Standard',
+        qty: 1,
+        img: product.img
+      });
+    }
+    updateCartBadge();
+
     const orig = btn.textContent;
-    btn.textContent = '\u2713 Added!';
+    btn.textContent = '✓ Added!';
     btn.style.background = 'linear-gradient(135deg, #3dd68c, #2bc57a)';
     btn.style.borderColor = '#3dd68c';
     btn.style.color = '#0d0f14';
@@ -313,6 +465,8 @@ document.querySelectorAll('.related-cta').forEach(btn => {
       btn.style.borderColor = '';
       btn.style.color = '';
     }, 1800);
+
+    showToast(product.name, 'Standard', 1);
   });
 });
 
