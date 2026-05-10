@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensCraft – Lumina X1 Pro Full-Frame Mirrorless Camera</title>
+  <meta name="description" content="Shop the LensCraft Lumina X1 Pro – a 45MP full-frame mirrorless camera with 8K video, AI autofocus, and weather sealing. Free shipping & 2-year warranty." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== STICKY CART BAR ===== -->
+  <div class="sticky-bar" id="sticky-bar" aria-hidden="true">
+    <div class="container sticky-bar-inner">
+      <div class="sticky-bar-product">
+        <img src="camera_main.png" alt="Lumina X1 Pro" class="sticky-bar-img" />
+        <div>
+          <span class="sticky-bar-name">Lumina X1 Pro</span>
+          <span class="sticky-bar-price">$2,499.00</span>
+        </div>
+      </div>
+      <div class="sticky-bar-actions">
+        <div class="stars" style="font-size:13px">
+          <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+          <span style="color:var(--clr-muted);margin-left:4px;font-size:12px">(247)</span>
+        </div>
+        <button class="btn-primary sticky-bar-btn" id="sticky-add-to-cart" onclick="stickyAddToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LIGHTBOX MODAL ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+    <img src="camera_main.png" alt="Lumina X1 Pro enlarged view" id="lightbox-img" class="lightbox-img" />
+    <div class="lightbox-thumbs" id="lightbox-thumbs">
+      <button class="lb-thumb active" data-src="camera_main.png"><img src="camera_main.png" alt="Front" /></button>
+      <button class="lb-thumb" data-src="camera_thumb2.png"><img src="camera_thumb2.png" alt="Lens" /></button>
+      <button class="lb-thumb" data-src="camera_thumb3.png"><img src="camera_thumb3.png" alt="Side" /></button>
+      <button class="lb-thumb" data-src="camera_thumb4.png"><img src="camera_thumb4.png" alt="Rear" /></button>
+    </div>
+  </div>
+  <div class="lightbox-overlay" id="lightbox-overlay"></div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon">🛒</span>
+    <div class="toast-text">
+      <strong>Added to cart!</strong>
+      <span id="toast-sub">Lumina X1 Pro — Midnight Black</span>
+    </div>
+    <a href="#" class="toast-view" id="toast-view">View Cart →</a>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="site-header">
+    <div class="header-inner container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo-icon">◉</span>
+        <span class="logo-text">LensCraft</span>
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Main navigation">
+        <a href="#" class="nav-link" id="nav-cameras">Cameras</a>
+        <a href="#" class="nav-link" id="nav-lenses">Lenses</a>
+        <a href="#" class="nav-link" id="nav-accessories">Accessories</a>
+        <a href="#" class="nav-link" id="nav-deals">Deals</a>
+        <a href="#" class="nav-link" id="nav-learn">Learn</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="search-btn" aria-label="Search">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="icon-btn" id="wishlist-btn" aria-label="Wishlist">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" id="cart-btn" aria-label="Cart">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cart-count">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb container" id="breadcrumb">
+    <a href="#">Home</a> <span>/</span>
+    <a href="#">Cameras</a> <span>/</span>
+    <a href="#">Mirrorless</a> <span>/</span>
+    <span class="bc-current">Lumina X1 Pro</span>
+  </div>
+
+  <!-- ===== PRODUCT SECTION ===== -->
+  <section class="product-section container" id="product-section">
+
+    <!-- LEFT: Gallery -->
+    <div class="product-gallery" id="product-gallery">
+      <div class="main-image-wrap" id="main-image-wrap">
+        <span class="badge-new">New</span>
+        <img src="camera_main.png" alt="LensCraft Lumina X1 Pro full-frame mirrorless camera, front view" id="main-product-img" class="main-img" />
+        <button class="zoom-btn" id="zoom-btn" aria-label="Zoom image">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+      </div>
+
+      <div class="thumbnails" id="thumbnails" role="list">
+        <button class="thumb active" id="thumb-1" aria-label="View front" role="listitem">
+          <img src="camera_main.png" alt="Camera front view thumbnail" />
+        </button>
+        <button class="thumb" id="thumb-2" aria-label="View lens" role="listitem">
+          <img src="camera_thumb2.png" alt="Camera lens thumbnail" />
+        </button>
+        <button class="thumb" id="thumb-3" aria-label="View side" role="listitem">
+          <img src="camera_thumb3.png" alt="Camera side view thumbnail" />
+        </button>
+        <button class="thumb" id="thumb-4" aria-label="View rear" role="listitem">
+          <img src="camera_thumb4.png" alt="Camera rear view thumbnail" />
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product Info -->
+    <div class="product-info" id="product-info">
+      <div class="brand-tag">LensCraft Professional</div>
+      <h1 class="product-title" id="product-title">Lumina X1 Pro</h1>
+      <p class="product-subtitle">Full-Frame Mirrorless Camera Body</p>
+
+      <!-- Rating -->
+      <div class="rating-row" id="rating-row">
+        <div class="stars" aria-label="4.8 out of 5 stars">
+          <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+        </div>
+        <span class="rating-score">4.8</span>
+        <a href="#reviews" class="rating-count">(247 reviews)</a>
+        <span class="divider">|</span>
+        <span class="stock-status in-stock" id="stock-status">✓ In Stock</span>
+      </div>
+
+      <!-- Price -->
+      <div class="price-block" id="price-block">
+        <span class="price-current" id="current-price">$2,499.00</span>
+        <span class="price-original" id="original-price">$2,999.00</span>
+        <span class="savings-badge" id="savings-badge">Save $500</span>
+      </div>
+
+      <!-- Color Selector -->
+      <div class="selector-group" id="color-selector">
+        <label class="selector-label">Color: <strong id="selected-color">Midnight Black</strong></label>
+        <div class="color-swatches">
+          <button class="swatch active" id="swatch-black" data-color="Midnight Black" style="background:#1a1a1a" aria-label="Midnight Black"></button>
+          <button class="swatch" id="swatch-silver" data-color="Titanium Silver" style="background:#c0c0c0" aria-label="Titanium Silver"></button>
+          <button class="swatch" id="swatch-green" data-color="Forest Green" style="background:#2d5a3d" aria-label="Forest Green"></button>
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div class="selector-group" id="qty-selector">
+        <label class="selector-label">Quantity</label>
+        <div class="qty-control">
+          <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+          <span class="qty-value" id="qty-value">1</span>
+          <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="cta-group" id="cta-group">
+        <button class="btn-primary" id="add-to-cart-btn">Add to Cart</button>
+        <button class="btn-secondary" id="buy-now-btn">Buy Now</button>
+        <button class="icon-btn-lg" id="wishlist-add-btn" aria-label="Add to wishlist">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+
+      <!-- Description -->
+      <div class="product-description" id="product-description">
+        <p>The Lumina X1 Pro redefines what a mirrorless camera can do. Featuring a 45MP back-illuminated full-frame sensor, 8K RAW video recording, and AI-powered subject tracking with eye-detection autofocus, it delivers breathtaking results in any condition. The dual card slots, weather-sealed magnesium alloy body, and 10-stop in-body stabilization make it the ultimate tool for professional photographers and videographers alike.</p>
+      </div>
+
+      <!-- Perks -->
+      <div class="perks-row" id="perks-row">
+        <div class="perk" id="perk-shipping">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span>Free Shipping</span>
+        </div>
+        <div class="perk" id="perk-returns">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+          <span>30-Day Returns</span>
+        </div>
+        <div class="perk" id="perk-warranty">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>2-Year Warranty</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPEC STRIP ===== -->
+  <section class="spec-strip" id="spec-strip" aria-label="Key specifications">
+    <div class="container spec-strip-inner">
+      <div class="spec-item reveal" id="spec-1">
+        <span class="spec-value">45<small>MP</small></span>
+        <span class="spec-label">Full-Frame Sensor</span>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-item reveal" id="spec-2">
+        <span class="spec-value">8<small>K</small></span>
+        <span class="spec-label">RAW Video</span>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-item reveal" id="spec-3">
+        <span class="spec-value">10<small>-stop</small></span>
+        <span class="spec-label">In-Body Stabilization</span>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-item reveal" id="spec-4">
+        <span class="spec-value">120<small>fps</small></span>
+        <span class="spec-label">Burst Speed</span>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-item reveal" id="spec-5">
+        <span class="spec-value">AI</span>
+        <span class="spec-label">Eye-Track AF</span>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-item reveal" id="spec-6">
+        <span class="spec-value">IP<small>54</small></span>
+        <span class="spec-label">Weather Sealed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT'S IN THE BOX ===== -->
+  <section class="inbox-section container reveal" id="whats-in-box">
+    <h2 class="section-title">What's in the Box</h2>
+    <div class="inbox-grid">
+      <div class="inbox-item" id="inbox-1">
+        <div class="inbox-icon">📷</div>
+        <span>Lumina X1 Pro Body</span>
+      </div>
+      <div class="inbox-item" id="inbox-2">
+        <div class="inbox-icon">🔋</div>
+        <span>LP-E6NH Battery (×2)</span>
+      </div>
+      <div class="inbox-item" id="inbox-3">
+        <div class="inbox-icon">🔌</div>
+        <span>USB-C Fast Charger</span>
+      </div>
+      <div class="inbox-item" id="inbox-4">
+        <div class="inbox-icon">🎛️</div>
+        <span>Body Cap & Strap</span>
+      </div>
+      <div class="inbox-item" id="inbox-5">
+        <div class="inbox-icon">🖥️</div>
+        <span>HDMI Cable (2m)</span>
+      </div>
+      <div class="inbox-item" id="inbox-6">
+        <div class="inbox-icon">📘</div>
+        <span>Quick Start Guide</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="reviews-section reveal" id="reviews">
+    <div class="container">
+      <h2 class="section-title">Customer Reviews</h2>
+
+      <div class="reviews-layout">
+        <!-- Summary -->
+        <div class="reviews-summary" id="reviews-summary">
+          <div class="big-score">4.8</div>
+          <div class="stars big-stars" aria-label="4.8 out of 5 stars">
+            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+          </div>
+          <p class="review-total">Based on 247 reviews</p>
+
+          <div class="rating-bars" id="rating-bars">
+            <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><span>72%</span></div>
+            <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div><span>18%</span></div>
+            <div class="bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span>6%</span></div>
+            <div class="bar-row"><span>2★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+            <div class="bar-row"><span>1★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+          </div>
+        </div>
+
+        <!-- Review Cards -->
+        <div class="reviews-cards" id="reviews-cards">
+
+          <article class="review-card" id="review-1">
+            <div class="review-header">
+              <div class="avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">AK</div>
+              <div class="reviewer-info">
+                <strong>Alex Kim</strong>
+                <span class="verified">✓ Verified Purchase</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <h3 class="review-title">Best camera I've ever owned</h3>
+            <p class="review-body">The autofocus is absolutely mind-blowing. I shoot wildlife and the eye-tracking locks on instantly even through dense foliage. 8K footage is stunning — this replaced my entire video rig.</p>
+            <span class="review-date">March 12, 2026</span>
+          </article>
+
+          <article class="review-card" id="review-2">
+            <div class="review-header">
+              <div class="avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">SP</div>
+              <div class="reviewer-info">
+                <strong>Sofia Patel</strong>
+                <span class="verified">✓ Verified Purchase</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <h3 class="review-title">Worth every single penny</h3>
+            <p class="review-body">Coming from a DSLR, the IBIS alone is a game-changer. Shot a full wedding weekend and the battery life surprised me — I only needed one swap. Build quality feels tank-like yet surprisingly light.</p>
+            <span class="review-date">April 2, 2026</span>
+          </article>
+
+          <article class="review-card" id="review-3">
+            <div class="review-header">
+              <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">MR</div>
+              <div class="reviewer-info">
+                <strong>Marcus Reid</strong>
+                <span class="verified">✓ Verified Purchase</span>
+              </div>
+              <div class="review-stars">★★★★<span style="opacity:0.3">★</span></div>
+            </div>
+            <h3 class="review-title">Pro-level performance, minor learning curve</h3>
+            <p class="review-body">Image quality is exceptional — dynamic range rivals medium-format cameras at a fraction of the cost. Menu system takes a week to master, but once you do, this thing is unstoppable in the field.</p>
+            <span class="review-date">April 19, 2026</span>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SHIPPING & WARRANTY ===== -->
+  <!-- reveal applied below -->
+  <section class="info-section container reveal" id="shipping-warranty">
+    <h2 class="section-title">Shipping &amp; Warranty</h2>
+    <div class="info-cards">
+
+      <div class="info-card" id="shipping-card">
+        <div class="info-icon">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Shipping Details</h3>
+        <ul class="info-list">
+          <li><strong>Free Standard Shipping</strong> — 5–7 business days</li>
+          <li><strong>Express Shipping</strong> — 2 business days ($14.99)</li>
+          <li><strong>Overnight Delivery</strong> — Next day ($29.99)</li>
+          <li>Orders placed before 2 PM EST ship same day</li>
+          <li>Full tracking provided via email & SMS</li>
+          <li>Free returns within 30 days — no questions asked</li>
+        </ul>
+      </div>
+
+      <div class="info-card" id="warranty-card">
+        <div class="info-icon">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Warranty Coverage</h3>
+        <ul class="info-list">
+          <li><strong>2-Year Manufacturer Warranty</strong> — all defects covered</li>
+          <li><strong>LensCraft Care+</strong> — extend to 4 years for $149</li>
+          <li>Accidental damage protection available</li>
+          <li>24/7 priority support via phone, chat, email</li>
+          <li>Free sensor cleaning (first year)</li>
+          <li>Authorized service centers in 40+ countries</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <!-- reveal applied below -->
+  <section class="newsletter-section reveal" id="newsletter-section">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2>Stay in the Frame</h2>
+        <p>Get early access to new gear drops, exclusive deals, and photography tips from the pros.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+        <input type="email" id="newsletter-email" placeholder="Enter your email address" class="newsletter-input" required aria-label="Email address" />
+        <button type="submit" class="btn-primary" id="newsletter-submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col" id="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">◉</span>
+          <span class="logo-text">LensCraft</span>
+        </a>
+        <p class="footer-tagline">Capturing the world, one frame at a time. Premium cameras and gear for every vision.</p>
+        <div class="social-links" id="social-links">
+          <a href="#" class="social-link" id="social-instagram" aria-label="Instagram">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-youtube" aria-label="YouTube">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.94A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-twitter" aria-label="Twitter/X">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" id="social-facebook" aria-label="Facebook">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col" id="footer-shop">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#" id="footer-mirrorless">Mirrorless Cameras</a></li>
+          <li><a href="#" id="footer-dslr">DSLR Cameras</a></li>
+          <li><a href="#" id="footer-lenses">Lenses</a></li>
+          <li><a href="#" id="footer-tripods">Tripods & Supports</a></li>
+          <li><a href="#" id="footer-bags">Camera Bags</a></li>
+          <li><a href="#" id="footer-filters">Filters & Lighting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" id="footer-support">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#" id="footer-help">Help Center</a></li>
+          <li><a href="#" id="footer-track">Track Your Order</a></li>
+          <li><a href="#" id="footer-returns">Returns & Exchanges</a></li>
+          <li><a href="#" id="footer-warranty-link">Warranty Claims</a></li>
+          <li><a href="#" id="footer-contact">Contact Us</a></li>
+          <li><a href="#" id="footer-repair">Repair Services</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" id="footer-company">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" id="footer-about">About LensCraft</a></li>
+          <li><a href="#" id="footer-blog">Photography Blog</a></li>
+          <li><a href="#" id="footer-careers">Careers</a></li>
+          <li><a href="#" id="footer-press">Press & Media</a></li>
+          <li><a href="#" id="footer-privacy">Privacy Policy</a></li>
+          <li><a href="#" id="footer-terms">Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 LensCraft Inc. All rights reserved.</p>
+        <div class="payment-icons" id="payment-icons" aria-label="Accepted payment methods">
+          <span class="payment-chip" id="pay-visa">VISA</span>
+          <span class="payment-chip" id="pay-mc">MC</span>
+          <span class="payment-chip" id="pay-amex">AMEX</span>
+          <span class="payment-chip" id="pay-paypal">PayPal</span>
+          <span class="payment-chip" id="pay-apple">Apple Pay</span>
+          <span class="payment-chip" id="pay-google">Google Pay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
